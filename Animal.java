@@ -4,10 +4,16 @@ public class Animal {
     // Rabbits will have 1 strike counter, Geese 2, deer and boar have 3 respectively
     private String name;
     private int strikeCount;
+    private int minHit; // Minimum roll to hit
+    private int maxHit; // Maximum roll to hit
+    private int points; // Points awarded for killing
 
-    public Animal(String name, int strikeCount) {
+    public Animal(String name, int strikeCount, int minHit, int maxHit, int points) {
         this.name = name;
         this.strikeCount = strikeCount;
+        this.minHit = minHit;
+        this.maxHit = maxHit;
+        this.points = points;
     }
 
     public String getName() {
@@ -16,6 +22,18 @@ public class Animal {
 
     public int getStrikeCount() {
         return strikeCount;
+    }
+
+    public int getMinHit() {
+        return minHit;
+    }
+
+    public int getMaxHit() {
+        return maxHit;
+    }
+
+    public int getPoints() {
+        return points;
     }
 
     public void reduceStrikeCount() {
