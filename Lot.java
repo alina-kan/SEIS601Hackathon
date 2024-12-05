@@ -37,7 +37,7 @@ public class Lot {
         // 10% chance of spawning the Killer Rabbit from that Monty Python movie
         if (random.nextInt(10) == 0) {
             // Animal, StrikeCount, minHit, maxHit, Points
-            animals.add(new Animal("Rabbit of Caerbannog", 10, 0, 0, 0));
+            animals.add(new Animal("Rabbit of Caerbannog", 10, 15, 20, 50));
         }
     }
 
