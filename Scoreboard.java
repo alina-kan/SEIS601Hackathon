@@ -21,3 +21,41 @@ public class Scoreboard {
         highScores.add(index, time);
     }
 }
+
+/*
+ * import java.util.ArrayList;
+
+public class Scoreboard {
+    private ArrayList<Integer> highScores = new ArrayList<>();
+
+    // Add a score to the leaderboard and maintain descending order
+    public void update(int score) {
+        int index = 0;
+
+        // Find the correct position to insert the score
+        for (int i = 0; i < highScores.size(); i++) {
+            if (score > highScores.get(i)) {
+                index = i;
+                break;
+            } else {
+                index = highScores.size();
+            }
+        }
+
+        // Add the score to the list
+        highScores.add(index, score);
+
+        // Print updated leaderboard
+        System.out.println("\n-- Current Leaderboard --");
+        printLeaderboard();
+    }
+
+    // Display all scores in the leaderboard
+    public void printLeaderboard() {
+        for (int i = 0; i < highScores.size(); i++) {
+            System.out.println((i + 1) + ". " + highScores.get(i));
+        }
+    }
+}
+ * 
+ */
