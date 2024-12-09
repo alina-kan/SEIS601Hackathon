@@ -19,5 +19,3 @@ Player Name: alina | Bow Name: jnfd | Score: 0 | Location: grove | Undo Availabl
 Player Name: fdjk | Bow Name: vdsjk | Score: 0 | Location: main | Undo Available: true | Save Time: 2024-12-08 17:54:35
 Player Name: fdjk | Bow Name: vdsjk | Score: 0 | Location: main | Undo Available: true | Save Time: 2024-12-08 17:55:02
 Player Name: fdjk | Bow Name: vdsjk | Score: 0 | Location: main | Undo Available: true | Save Time: 2024-12-08 17:55:04
-Player Name: fjnks | Bow Name: vfjnk | Score: 0 | Location: main | Undo Available: true | Save Time: 2024-12-08 17:55:26
-Player Name: fjnks | Bow Name: vfjnk | Score: 0 | Location: forest | Undo Available: true | Save Time: 2024-12-08 17:55:29

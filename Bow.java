@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class Bow {
+    private String bowName = "";
     private int bowHealth = 100; // base health
     private int score = 0; // inital score
     private Random random = new Random();
@@ -12,6 +13,10 @@ public class Bow {
     public int getScore() {
         return score;
     }
+
+    public String getBowName() { return bowName; }
+
+    public void setBowName(String name) { this.bowName = name; }
 
     public boolean attackAnimal(Animal animal) {
         if (bowHealth <= 0) {

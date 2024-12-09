@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+
 public class Scoreboard {
-    public ArrayList<Long> highScores = new ArrayList<Long>();
+    public ArrayList<Integer> highScores = new ArrayList<Integer>();
 
     public void update(int score){
         System.out.println("--Current Leaderboard-- ");
@@ -18,12 +20,12 @@ public class Scoreboard {
             }
         }
         
-        highScores.add(index, time);
+        highScores.add(index, Integer.valueOf(score));
     }
 }
 
 /*
- * import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class Scoreboard {
     private ArrayList<Integer> highScores = new ArrayList<>();
