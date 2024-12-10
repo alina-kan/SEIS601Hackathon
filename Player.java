@@ -21,8 +21,12 @@ public class Player {
     // 12/10 update
     public String report() {
         return String.format(
-                "Player %s:\n  Score: %d\n  Current Bow Health: %d\n  Undo Available: %b\n  Current Location: %s",
-                playerName, score, playerBow.getBowHealth(), undo, currentLocation
+               // "Player %s:\n  Score: %d\n  Current Bow Health: %d\n  Undo Available: %b\n  Current Location: %s",
+               // playerName, score, playerBow.getBowHealth(), undo, currentLocation
+               
+               // 12/10 update
+               "Player %s:\n  Score: %d\n  Current Bow Health: %d\n  Undo Available: %s\n  Current Location: %s",
+               playerName, score, playerBow.getBowHealth(), undo ? "Yes" : "No", currentLocation
         );
     }
 
