@@ -14,6 +14,16 @@ public class Bow {
         return score;
     }
 
+    // 12/10 update
+    public void setBowHealth(int health) {
+        this.bowHealth = health;
+    }
+    
+    // 12/10 update
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public String getBowName() { return bowName; }
 
     public void setBowName(String name) { this.bowName = name; }
@@ -67,3 +77,33 @@ public class Bow {
         return false;
     }
 }
+
+
+/*
+ * public class Bow {
+    private int durability;
+
+    public Bow(int durability) {
+        this.durability = durability;
+    }
+
+    public boolean isBroken() {
+        return durability <= 0;
+    }
+
+    public void useBow(int damage) {
+        this.durability -= damage;
+        if (this.durability < 0) this.durability = 0;
+    }
+
+    public int getDurability() {
+        return durability;
+    }
+
+    public String report() {
+        return "Bow Durability: " + durability;
+    }
+}
+ */
+
+ // I don't know if this is necessary

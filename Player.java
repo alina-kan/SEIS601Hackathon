@@ -14,42 +14,55 @@ public class Player {
         this.currentLocation = location;
     }
 
-    public Bow getPlayerBow(){ return playerBow; }
+    public Bow getPlayerBow(){ 
+        return playerBow; 
+    }
 
-    /*
+    // 12/10 update
     public String report() {
         return String.format(
                 "Player %s:\n  Score: %d\n  Current Bow Health: %d\n  Undo Available: %b\n  Current Location: %s",
-                playerName, score, bowHealth, undo, currentLocation
+                playerName, score, playerBow.getBowHealth(), undo, currentLocation
         );
-    } */
+    }
 
 }
 
 /*
  * public class Player {
-    public String playerName;
-    public int score = 0;
-    public boolean undo = true; // Placeholder: Modify or remove if not used in gameplay
-    public String currentLocation = "main"; // Tracks location, update during gameplay
-    public int bowHealth = 100; // Default starting bow health
+    public String PlayerName;
+    public int score;
+    public boolean undo;
+    public String currentLocation;
+    public int bowHealth;
 
-    // Constructor
-    public Player(String playerName, int score, boolean undo) {
-        this.playerName = playerName;
+    public Player(String PlayerName, int score, boolean undo) {
+        this.PlayerName = PlayerName;
         this.score = score;
         this.undo = undo;
+        this.currentLocation = "main";
+        this.bowHealth = 100;
     }
 
-    // Report player status
+    public void resetState(String location, int health, int score) {
+        this.currentLocation = location;
+        this.bowHealth = health;
+        this.score = score;
+    }
+
+    public void updateScore(int points) {
+        this.score += points;
+    }
+
+    public void damageBow(int damage) {
+        this.bowHealth -= damage;
+        if (this.bowHealth < 0) this.bowHealth = 0;
+    }
+
     public String report() {
-        return String.format(
-            "Player %s:\n  Score: %d\n  Current Bow Health: %d\n  Undo Available: %b\n  Current Location: %s",
-            playerName, score, bowHealth, undo, currentLocation
-        );
+        return "Player " + PlayerName + ":\nScore: " + score + ", Current Bow Health: " + bowHealth + ", Undo Available: " + undo + ", Current Location: " + currentLocation;
     }
 }
  */
 
- // Again, use whatever resources to try and adjust the code, I'll be looking through all this
- // again and again when I have the time before the next class
+// 12/10 update, check it out

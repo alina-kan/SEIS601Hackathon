@@ -140,3 +140,126 @@ public class Driver {
     }
 
 }
+
+/*
+ * import java.util.Scanner;
+
+public class Driver {
+    public static void main(String[] args) {
+        GameConfig config = new GameConfig();
+        Scanner scanner = new Scanner(System.in);
+        boolean gameContinue = true;
+        Player player = null;
+
+        System.out.println("Welcome to Hunting Around!");
+        System.out.println("If at any point during the game you would like to save, type \"save\", and feel free to quit.");
+
+        System.out.print("Are you a returning player? (Y/N): ");
+        String answer = scanner.nextLine().trim().toLowerCase();
+        if (answer.equals("y")) {
+            System.out.print("Enter player name: ");
+            String playerName = scanner.nextLine();
+            player = config.loadGame(playerName);
+            if (player == null) {
+                System.out.println("No save found. Starting a new game.");
+                player = new Player(playerName, 0, true);
+            }
+        } else {
+            System.out.print("Please enter your name: ");
+            String playerName = scanner.nextLine();
+            player = new Player(playerName, 0, true);
+        }
+
+        Bow bow = new Bow(100);
+
+        while (gameContinue) {
+            System.out.println(player.report());
+            System.out.println(bow.report());
+            System.out.print("Which area would you like to hunt in?\n1. The small animal grove\n2. The big animal forest\nYour Choice (number, or type \"quit\" to finish): ");
+            String choice = scanner.nextLine().trim().toLowerCase();
+
+            if (choice.equals("1")) {
+                int groveScore = huntInLot("Grassland", bow, player);
+                player.updateScore(groveScore);
+            } else if (choice.equals("2")) {
+                int forestScore = huntInLot("Forest", bow, player);
+                player.updateScore(forestScore);
+            } else if (choice.equals("save")) {
+                config.saveGameRun(player.PlayerName, player);
+            } else if (choice.equals("quit")) {
+                System.out.println("\nGame Over! Your final score: " + player.score);
+                System.out.print("Enter your bow name: ");
+                String bowName = scanner.nextLine();
+                config.saveGameRun(player.PlayerName + "'s " + bowName, player);
+                System.out.println("Your run has been saved!");
+                gameContinue = false;
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+            }
+
+            if (bow.isBroken()) {
+                System.out.println("Your bow has broken! Game over.");
+                gameContinue = false;
+            }
+        }
+
+        System.out.println("Final Leaderboard:");
+        config.savedGames.forEach((name, savedPlayer) -> {
+            System.out.println(name + " - Score: " + savedPlayer.score);
+        });
+
+        scanner.close();
+    }
+
+    public static int huntInLot(String lotName, Bow bow, Player player) {
+        Lot lot = new Lot(lotName);
+        Scanner scanner = new Scanner(System.in);
+        int pointsEarned = 0;
+
+        while (true) {
+            System.out.println("You are hunting in the " + lotName + ".");
+            Animal animal = lot.spawnAnimal();
+            System.out.println("You encountered a " + animal.getName() + "! It requires " + animal.getHealth() + " strikes to kill.");
+
+            while (animal.getHealth() > 0) {
+                System.out.print("Roll to strike (type \"roll\" or \"leave\" to exit): ");
+                String action = scanner.nextLine().trim().toLowerCase();
+
+                if (action.equals("roll")) {
+                    int roll = (int) (Math.random() * 20) + 1;
+                    if (roll >= animal.getHitRequirement()) {
+                        System.out.println("You hit the " + animal.getName() + "!");
+                        animal.reduceHealth();
+                        if (roll == 20) {
+                            System.out.println("Critical hit! You deal an extra strike.");
+                            animal.reduceHealth();
+                        }
+                    } else if (roll == 1) {
+                        System.out.println("Critical fail! Your bow takes damage.");
+                        bow.useBow(10);
+                    } else {
+                        System.out.println("You missed!");
+                        bow.useBow(5);
+                    }
+
+                    if (bow.isBroken()) {
+                        System.out.println("Your bow broke mid-hunt! Returning to camp.");
+                        return pointsEarned;
+                    }
+                } else if (action.equals("leave")) {
+                    System.out.println("You left the " + lotName + ".");
+                    return pointsEarned;
+                } else {
+                    System.out.println("Invalid action. Try again.");
+                }
+            }
+        if (animal.getHealth() <= 0) {
+            System.out.println("You killed the " + animal.getName() + "! You earn " + animal.getPoints() + " points.");
+            pointsEarned += animal.getPoints();
+        }
+    }
+}
+
+ */
+
+ // 12/10, maybe this will work for the intergartion rather than jupiter?
