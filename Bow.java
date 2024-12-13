@@ -18,10 +18,10 @@ public class Bow {
 
     public void setBowName(String name) { this.bowName = name; }
 
-    public boolean attackAnimal(Animal animal) {
+    public int attackAnimal(Animal animal) {
         if (bowHealth <= 0) {
             System.out.println("Bow is broken! You can't fire anymore arrows!");
-            return false;
+            return 0;
         }
 
         // roll a d20
@@ -56,7 +56,7 @@ public class Bow {
         if (animal.isKilled()) {
             System.out.println("You killed the " + animal.getName() + " and earned " + animal.getPoints() + " points!");
             score += animal.getPoints();
-            return true;
+            return animal.getPoints();
         }
 
         // bow health
@@ -64,6 +64,6 @@ public class Bow {
             System.out.println("Your bow is broken!");
         }
 
-        return false;
+        return 0;
     }
 }

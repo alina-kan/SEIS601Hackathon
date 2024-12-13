@@ -22,13 +22,18 @@ public class Lot {
     }
 
     public void populateLot() {
-        if (land.equals("Grasslands")) {
+        //System.out.println("Adding animals");
+        if (land.equalsIgnoreCase("Grasslands")) {
             // Animal, StrikeCount, minHit, maxHit, Points
             animals.add(new Animal("Rabbit", 1, 3, 20, 1));
+            //System.out.println("Added rabbit");
             animals.add(new Animal("Goose", 2, 5, 20, 3));
-        } else if (land.equals("Forest")) {
+            //System.out.println("Added goose");
+        } else if (land.equalsIgnoreCase("Forest")) {
             animals.add(new Animal("Deer", 3, 8, 20, 5));
             animals.add(new Animal("Boar", 3, 10, 20, 10));
+        } else {
+            System.out.println("No population");
         }
     }
 

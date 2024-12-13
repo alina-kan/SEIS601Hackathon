@@ -4,10 +4,12 @@ public class Player {
     public int score = 0;
     public boolean undo = true; // Placeholder: Modify or remove if not used in gameplay
     public String currentLocation = "main"; // Tracks location, update during gameplay
+    public int bowHealth;
 
     public Player(String playerName, String bowName, int score, String location){
         this.playerBow = new Bow();
         playerBow.setBowName(bowName);
+        this.bowHealth = playerBow.getBowHealth();
         this.playerName = playerName;
         this.score = playerBow.getScore();
         this.undo = true;
@@ -16,13 +18,12 @@ public class Player {
 
     public Bow getPlayerBow(){ return playerBow; }
 
-    /*
     public String report() {
         return String.format(
                 "Player %s:\n  Score: %d\n  Current Bow Health: %d\n  Undo Available: %b\n  Current Location: %s",
-                playerName, score, bowHealth, undo, currentLocation
+                playerName, score, playerBow.getBowHealth(), undo, currentLocation
         );
-    } */
+    }
 
 }
 

@@ -14,7 +14,7 @@ public class Driver {
         String bowName = "";
         System.out.println("Welcome to Hunting Around!");
         System.out.println("This game auto saves, so feel free to quit at any time.");
-        System.out.print("Are you a returning player? (Y/N): ");
+        /*System.out.print("Are you a returning player? (Y/N): ");
         String answer = scanner.nextLine().trim().toLowerCase();
         if (answer.equals("y")){
             System.out.print("Enter player name: ");
@@ -34,21 +34,29 @@ public class Driver {
             player = new Player(pName, bowName, 0, "main");
             playerBow = player.getPlayerBow();
             playerBow.setBowName(bowName);
-        }
-
+        } */
+        System.out.print("Please enter your name: ");
+        pName = scanner.nextLine();
+        System.out.print("You have received a bow! Enter your bow's name: ");
+        bowName = scanner.nextLine();
+        player = new Player(pName, bowName, 0, "main");
+        playerBow = player.getPlayerBow();
+        playerBow.setBowName(bowName);
+        Lot grassland = new Lot("grasslands");
+        Lot forest = new Lot("forest");
         while (gameContinue){
             player.currentLocation = "main";
-            config.saveGameRun(player.playerName, bowName, player.score, player.currentLocation, player.undo);
+            //config.saveGameRun(player.playerName, bowName, player.score, player.currentLocation, player.undo);
             System.out.println("Your current score: " + player.score);
-            System.out.print("Which area would you like to hunt in?\n1. The small animal grove\n2. The big animal forest\nYour Choice (number, or type \"quit\" to finish): ");
+            System.out.print("Which area would you like to hunt in?\n1. The small animal grassland\n2. The big animal forest\nYour Choice (number, or type \"quit\" to finish): ");
             String choice = scanner.nextLine().trim();
 
             if (choice.equals("1")) {
-                player.currentLocation = "grove";
-                groveGame(player, config, scanner);
+                player.currentLocation = "grassland";
+                grassGame(player, config, scanner, grassland);
             } else if (choice.equals("2")) {
                 player.currentLocation = "forest";
-                forestGame(player, config, scanner);
+                forestGame(player, config, scanner, forest);
             } else if (choice.equalsIgnoreCase("quit")) {
                 quit(player, config, scanner);
             } else {
@@ -66,6 +74,8 @@ public class Driver {
         if (gameRestart){
             System.out.print("Please enter your name: ");
             player.playerName = scanner.nextLine();
+            System.out.print("You have received a bow! Enter your bow's name: ");
+            player.playerBow.setBowName(scanner.nextLine());
             player.score = 0;
             player.undo = true;
         } else {
@@ -88,54 +98,111 @@ public class Driver {
         return true;
     }
 
-    public static void groveGame(Player player, GameConfig config, Scanner scanner){
-        boolean groveContinue = true;
-        boolean gStay = true;
-        while(groveContinue){
-            System.out.println("You are currently in the grove. Current score: " + player.score);
+    public static void grassGame(Player player, GameConfig config, Scanner scanner, Lot grassland){
+        boolean grassContinue = true;
+        while(grassContinue) {
+            System.out.println("You are currently in the grassland. Current score: " + player.score);
             //implement game mechanics here
-            while(gStay){
-                System.out.print("Would you like to stay in the grove? (Y/N): ");
-                String answer = scanner.nextLine().trim().toLowerCase();
-                if (answer.equals("n")){
-                    groveContinue = false;
-                    gStay = false;
-                } else if (answer.equalsIgnoreCase("quit")){
-                    groveContinue = false;
-                    quit(player, config, scanner);
-                } else if (!answer.equals("y")&&!answer.equals("n") && !answer.equalsIgnoreCase("quit")){
-                    System.out.println("Invalid choice. Please enter one of the provided choices.");
-                } else {
-                    break;
-                }
+            System.out.print("Enter your action (leave, hunt, report, quit): ");
+            String answer = scanner.nextLine().trim().toLowerCase();
+            if (answer.equals("report")) {
+                System.out.println(player.report());
+            } else if (answer.equals("hunt")){
+                //System.out.println("Land: " + grassland.getLand());
+                hunt(player, grassland, scanner, config);
+                //System.out.println("Current Animals: " + grassland.getAnimals().toString());
+            }else if (answer.equalsIgnoreCase("quit")){
+                grassContinue = false;
+                quit(player, config, scanner);
+            } else if (answer.equals("leave")) {
+                System.out.println("Leaving area...");
+                grassContinue = false;
+            } else {
+                System.out.println("Invalid choice. Please enter one of the provided choices.");
             }
         }
     }
 
 
-    public static void forestGame(Player player, GameConfig config, Scanner scanner){
-        Scanner forestScanner = new Scanner(System.in);
+    public static void forestGame(Player player, GameConfig config, Scanner scanner, Lot forest){
         boolean forestContinue = true;
-        boolean fStay = true;
         while(forestContinue){
             System.out.println("You are currently in the forest. Current score: " + player.score);
-            
-            while(fStay){
-                System.out.print("Would you like to stay in the forest? (Y/N): ");
-                String answer = forestScanner.nextLine().trim().toLowerCase();
-                if (answer.equals("n")){
-                    forestContinue = false;
-                    fStay = false;
+            //implement game mechanics here
+            System.out.print("Enter your action (leave, hunt, report, quit): ");
+            String answer = scanner.nextLine().trim().toLowerCase();
+            if (answer.equals("report")) {
+                System.out.println(player.report());
+            } else if (answer.equals("hunt")){
+                //System.out.println("Land: " + grassland.getLand());
+                hunt(player, forest, scanner, config);
+                //System.out.println("Current Animals: " + grassland.getAnimals().toString());
+            }else if (answer.equalsIgnoreCase("quit")){
+                forestContinue = false;
+                quit(player, config, scanner);
+            } else if (answer.equals("leave")) {
+                System.out.println("Leaving area...");
+                forestContinue = false;
+            } else {
+                System.out.println("Invalid choice. Please enter one of the provided choices.");
+            }
+        }
+    }
+
+    public static void hunt(Player player, Lot lot, Scanner scanner, GameConfig config){
+        //take in list of animals from land and shoot them
+        boolean hunting = true;
+        while (hunting) {
+            if (lot.getAnimals().size() == 0){
+                System.out.println("All animals have been killed!");
+                break;
+            }
+            System.out.println("You are currently hunting. Score: " + player.score);
+
+            System.out.println("Current animals: ");
+            for (int i = 0; i < lot.getAnimals().size(); i++){
+                System.out.println(i + ": " + lot.getAnimals().get(i));
+            }
+
+            boolean notHunting = true;
+            while (notHunting){
+                System.out.print("Enter your action (stop, hunt, report, quit): ");
+                String answer = scanner.nextLine().trim().toLowerCase();
+                if (answer.equals("hunt")){
+                    notHunting = false;
+                } else if (answer.equals("report")) {
+                    System.out.println(player.report());
                 } else if (answer.equalsIgnoreCase("quit")){
-                    forestContinue = false;
                     quit(player, config, scanner);
-                } else if (!answer.equals("y")&&!answer.equals("n") && !answer.equalsIgnoreCase("quit")){
-                    System.out.println("Invalid choice. Please enter one of the provided choices.");
+                } else if (answer.equals("stop")) {
+                    System.out.println("Stopping hunt...");
+                    notHunting = false;
+                    hunting = false;
+                    return;
                 } else {
-                    break;
+                    System.out.println("Try again");
                 }
             }
-            //groveContinue = false;
+
+            System.out.print("Which animal do you want to shoot? Enter list number: ");
+            int choice = scanner.nextInt();
+            Animal chosen = lot.getAnimals().get(choice);
+            scanner.nextLine();
+
+            player.score += player.playerBow.attackAnimal(chosen);
+            if (chosen.isKilled()){
+                lot.getAnimals().remove(choice);
+            }
+
+            System.out.print("Would you like to keep hunting? (Y/N): ");
+            String leave = scanner.nextLine();
+            if (leave.equals("n")){//answer.equals("n")){
+                hunting = false;
+            } else if (!leave.equals("y")&&!leave.equals("n")){
+                System.out.println("Invalid choice. Please enter the number of which area you'd like to explore.");
+            } else {
+                hunting = true;
+            }
         }
     }
 
